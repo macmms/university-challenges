@@ -64,12 +64,12 @@ public class ActionService
 	/**
 	 * Say statement to entity.
 	 *
-	 * @param speaker the entity speaking
 	 * @param recipient the entity being spoken to
+	 * @param speaker the entity speaking
 	 * @param statementToSay the statement to say
 	 * @return the statement spoken by the entity
 	 */
-	public Statement talkTo(GameEntity speaker, GameEntity recipient, Statement statementToSay)
+	public Statement talkTo(GameEntity recipient, GameEntity speaker, Statement statementToSay)
 	{
 		return null;
 	}

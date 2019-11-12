@@ -1,6 +1,5 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
-import com.fiixsoftware.challenges.rpgbot.models.types.StatementType;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -11,15 +10,15 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class Statement
+public class Coordinate
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column(nullable = false)
-	private StatementType statementType;
+	private long x;
 
 	@Column(nullable = false)
-	private String message;
+	private long y;
 }

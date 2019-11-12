@@ -1,7 +1,9 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.models.Trade;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Trade;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.GameEntityRepository;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,12 @@ public class TradeService
 {
 	@Autowired
 	private InventoryService inventoryService;
+
+	@Autowired
+	private TradeRepository tradeRepository;
+
+	@Autowired
+	private GameEntityRepository gameEntityRepository;
 
 	/**
 	 * Start trade between trade.

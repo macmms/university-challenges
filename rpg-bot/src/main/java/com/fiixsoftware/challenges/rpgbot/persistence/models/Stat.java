@@ -1,5 +1,6 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatType;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-public class Affection
+public class Stat
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,9 +22,9 @@ public class Affection
 	@ManyToOne(cascade = CascadeType.ALL)
 	private GameEntity gameEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private GameEntity entityAffectionIsToward;
+	@Column(nullable = false)
+	private StatType statType;
 
 	@Column(nullable = false)
-	private int amountOfAffection;
+	private long value;
 }

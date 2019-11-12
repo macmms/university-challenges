@@ -1,4 +1,4 @@
-package com.fiixsoftware.challenges.rpgbot.models.types;
+package com.fiixsoftware.challenges.rpgbot.persistence.models.types;
 
 import lombok.AllArgsConstructor;
 

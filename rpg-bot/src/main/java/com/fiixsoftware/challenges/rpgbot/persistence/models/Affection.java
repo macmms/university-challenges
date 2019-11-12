@@ -1,4 +1,4 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
 import lombok.Data;
 
@@ -12,15 +12,18 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-public class Location
+public class Affection
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Map map;
+	private GameEntity entityWithAffection;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Coordinate coordinate;
+	private GameEntity entityAffectionIsToward;
+
+	@Column(nullable = false)
+	private int amountOfAffection;
 }

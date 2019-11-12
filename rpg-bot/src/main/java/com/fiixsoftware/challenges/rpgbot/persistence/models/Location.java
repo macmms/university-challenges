@@ -1,20 +1,25 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
+
+import lombok.Data;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-public class Relationship
+@Data
+@Entity
+public class Location
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private GameEntity relationshipMemberA;
+	private Map map;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private GameEntity relationshipMemberB;
+	private Coordinate coordinate;
 }

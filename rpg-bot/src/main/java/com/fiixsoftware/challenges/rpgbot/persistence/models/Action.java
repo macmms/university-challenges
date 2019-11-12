@@ -1,6 +1,6 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
-import com.fiixsoftware.challenges.rpgbot.models.types.GameEntityType;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.ActionType;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -10,26 +10,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-public class GameEntity
+public class Action
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Stat> stats;
-
-	@Column(nullable = false, unique = true)
-	private String name;
-
 	@Column(nullable = false)
-	private GameEntityType gameEntityType;
+	private ActionType actionType;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Affection> affections = new ArrayList<>();
+	private List<Stat> statRequirements;
+
+	@Column
+	private long power;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Stat> statMultiplier;
 }

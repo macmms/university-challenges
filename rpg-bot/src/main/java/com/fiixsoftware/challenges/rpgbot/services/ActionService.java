@@ -1,10 +1,12 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.models.Action;
-import com.fiixsoftware.challenges.rpgbot.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.models.Location;
-import com.fiixsoftware.challenges.rpgbot.models.Statement;
-import com.fiixsoftware.challenges.rpgbot.models.types.GameEntityType;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Action;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Location;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.ActionRepository;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,12 @@ public class ActionService
 {
 	@Autowired
 	private MapService mapService;
+
+	@Autowired
+	private ActionRepository actionRepository;
+
+	@Autowired
+	private LocationRepository locationRepository;
 
 	/**
 	 * Move to.

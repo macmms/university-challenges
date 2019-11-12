@@ -1,5 +1,7 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.ActionRepository;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.LocationRepository;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,4 +15,10 @@ class ActionServiceTest
 
 	@Mock
 	private MapService mockedMapService;
+
+	@Mock
+	private ActionRepository mockedActionRepository;
+
+	@Mock
+	private LocationRepository mockedLocationRepository;
 }

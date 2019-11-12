@@ -1,9 +1,11 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.models.Action;
-import com.fiixsoftware.challenges.rpgbot.models.Affection;
-import com.fiixsoftware.challenges.rpgbot.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.models.Statement;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Action;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Affection;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.AffectionRepository;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.RelationshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class LoveService
 {
 	@Autowired
 	private ActionService actionService;
+
+	@Autowired
+	private AffectionRepository affectionRepository;
+
+	@Autowired
+	private RelationshipRepository relationshipRepository;
 
 	/**
 	 * Flirt with affection.

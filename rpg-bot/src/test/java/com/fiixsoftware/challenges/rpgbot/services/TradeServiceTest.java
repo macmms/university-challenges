@@ -1,5 +1,6 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.TradeRepository;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,4 +14,7 @@ class TradeServiceTest
 
 	@Mock
 	private InventoryService mockedInventoryService;
+
+	@Mock
+	private TradeRepository mockedTradeRepository;
 }

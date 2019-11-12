@@ -1,4 +1,4 @@
-package com.fiixsoftware.challenges.rpgbot.models;
+package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
 import lombok.Data;
 

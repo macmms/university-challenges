@@ -1,7 +1,7 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.models.Location;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Location;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

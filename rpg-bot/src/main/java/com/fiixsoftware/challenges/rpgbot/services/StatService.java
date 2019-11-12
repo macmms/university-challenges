@@ -1,7 +1,9 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.models.Stat;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Stat;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.StatRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 @Service
 public class StatService
 {
+	@Autowired
+	private StatRepository statRepository;
+
 	/**
 	 * Level up boolean.
 	 *

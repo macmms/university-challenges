@@ -29,13 +29,13 @@ public class LoveServiceTest
 	private LoveService sut;
 
 	@Mock
-	private ActionService mockedActionService;
-
-	@Mock
 	private AffectionRepository mockedAffectionRepository;
 
 	@Mock
 	private RelationshipRepository mockedRelationshipRepository;
+
+	@Mock
+	private InventoryService mockedInventoryService;
 
 	@Test
 	public void testPlayerFlirtWithNPCWithNoPriorAffection()

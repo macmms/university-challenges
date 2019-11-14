@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum StatType
 {
+	LEVEL("level"),
 	MAX_HEALTH("maximum health"),
 	HEALTH("health"),
 	MAX_MANA("maximum mana"),

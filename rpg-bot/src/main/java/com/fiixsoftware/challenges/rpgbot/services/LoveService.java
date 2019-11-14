@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
 public class LoveService
 {
 	@Autowired
-	private ActionService actionService;
-
-	@Autowired
 	private AffectionRepository affectionRepository;
 
 	@Autowired
 	private RelationshipRepository relationshipRepository;
+
+	@Autowired
+	private InventoryService inventoryService;
 
 	/**
 	 * Flirt with an NPC using a flirtatious statement.
@@ -32,7 +32,7 @@ public class LoveService
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param flirtyStatement the flirty statement
-	 * @return the affection
+	 * @return the affection of the recipient
 	 */
 	public Affection flirtWith(GameEntity provider, GameEntity recipient, Statement flirtyStatement)
 	{
@@ -77,7 +77,7 @@ public class LoveService
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param gift the gift
-	 * @return the affection
+	 * @return the affection of the recipient
 	 */
 	public Affection giveGiftTo(GameEntity provider, GameEntity recipient, GameEntity gift)
 	{
@@ -90,7 +90,7 @@ public class LoveService
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param action the action
-	 * @return the affection
+	 * @return the affection of the recipient
 	 */
 	public Affection showPhysicalAffectionTo(GameEntity provider, GameEntity recipient, Action action)
 	{
@@ -102,7 +102,7 @@ public class LoveService
 	 *
 	 * @param initiator the initiator
 	 * @param target the target
-	 * @return the boolean
+	 * @return the success or failure of entering the relationship
 	 */
 	public boolean enterRelationshipWith(GameEntity initiator, GameEntity target)
 	{
@@ -114,7 +114,7 @@ public class LoveService
 	 *
 	 * @param heartbreaker the heartbreaker
 	 * @param heartbroken the heartbroken
-	 * @return the boolean
+	 * @return the success or failure of ending the relationship
 	 */
 	public boolean breakUpWith(GameEntity heartbreaker, GameEntity heartbroken)
 	{

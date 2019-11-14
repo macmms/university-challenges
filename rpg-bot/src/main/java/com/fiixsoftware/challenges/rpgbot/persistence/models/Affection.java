@@ -1,6 +1,8 @@
 package com.fiixsoftware.challenges.rpgbot.persistence.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,8 +14,18 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Affection
 {
+	@JsonIgnore
+	public static final long MINIMUM_AFFECTION = 0L;
+
+	@JsonIgnore
+	public static final long STARTING_AFFECTION = 50L;
+
+	@JsonIgnore
+	public static final long MAXIMUM_AFFECTION = 100L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -25,5 +37,13 @@ public class Affection
 	private GameEntity entityAffectionIsToward;
 
 	@Column(nullable = false)
-	private int amountOfAffection;
+	private long amountOfAffection;
+
+	@JsonIgnore
+	public Affection(GameEntity entityWithAffection, GameEntity entityAffectionIsToward)
+	{
+		this.entityWithAffection = entityWithAffection;
+		this.entityAffectionIsToward = entityAffectionIsToward;
+		this.amountOfAffection = STARTING_AFFECTION;
+	}
 }

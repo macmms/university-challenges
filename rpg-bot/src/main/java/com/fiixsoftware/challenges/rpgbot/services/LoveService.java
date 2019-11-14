@@ -4,6 +4,8 @@ import com.fiixsoftware.challenges.rpgbot.persistence.models.Action;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.Affection;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatementType;
 import com.fiixsoftware.challenges.rpgbot.persistence.repositories.AffectionRepository;
 import com.fiixsoftware.challenges.rpgbot.persistence.repositories.RelationshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,64 +27,96 @@ public class LoveService
 	private RelationshipRepository relationshipRepository;
 
 	/**
-	 * Flirt with affection.
+	 * Flirt with an NPC using a flirtatious statement.
 	 *
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param flirtyStatement the flirty statement
 	 * @return the affection
 	 */
-	Affection FlirtWith(GameEntity provider, GameEntity recipient, Statement flirtyStatement)
+	public Affection flirtWith(GameEntity provider, GameEntity recipient, Statement flirtyStatement)
 	{
-		return null;
+		if (recipient.getGameEntityType() != GameEntityType.NPC)
+		{
+			return null;
+		}
+
+		Affection affectionForProvider = null;
+		for (Affection affection : recipient.getAffections())
+		{
+			if (affection.getEntityAffectionIsToward().equals(provider))
+			{
+				affectionForProvider = affection;
+			}
+		}
+
+		if (affectionForProvider == null)
+		{
+			affectionForProvider = new Affection(recipient, provider);
+		}
+
+		// Note:
+		// Flirting does not always result in increased affection in real life.
+		// Please do not make unwanted moves toward others, and respect when people say no.
+		if (flirtyStatement.getStatementType() == StatementType.FLIRT)
+		{
+			affectionForProvider.setAmountOfAffection(Math.min(affectionForProvider.getAmountOfAffection() + 5L, Affection.MAXIMUM_AFFECTION));
+		}
+		else
+		{
+			affectionForProvider.setAmountOfAffection(Math.max(affectionForProvider.getAmountOfAffection() - 5L, Affection.MINIMUM_AFFECTION));
+		}
+
+		affectionRepository.save(affectionForProvider);
+		return affectionForProvider;
 	}
 
 	/**
-	 * Give gift to affection.
+	 * Give a gift to an NPC.
 	 *
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param gift the gift
 	 * @return the affection
 	 */
-	Affection GiveGiftTo(GameEntity provider, GameEntity recipient, GameEntity gift)
+	public Affection giveGiftTo(GameEntity provider, GameEntity recipient, GameEntity gift)
 	{
 		return null;
 	}
 
 	/**
-	 * Show physical affection to affection.
+	 * Show physical affection to an NPC.
 	 *
 	 * @param provider the provider
 	 * @param recipient the recipient
 	 * @param action the action
 	 * @return the affection
 	 */
-	Affection ShowPhysicalAffectionTo(GameEntity provider, GameEntity recipient, Action action)
+	public Affection showPhysicalAffectionTo(GameEntity provider, GameEntity recipient, Action action)
 	{
 		return null;
 	}
 
 	/**
-	 * Enter relationship with boolean.
+	 * Enter a relationship with an NPC.
 	 *
 	 * @param initiator the initiator
 	 * @param target the target
 	 * @return the boolean
 	 */
-	boolean EnterRelationshipWith(GameEntity initiator, GameEntity target)
+	public boolean enterRelationshipWith(GameEntity initiator, GameEntity target)
 	{
 		return false;
 	}
 
 	/**
-	 * Break up with boolean.
+	 * Break up an existing relationship with an NPC.
 	 *
 	 * @param heartbreaker the heartbreaker
 	 * @param heartbroken the heartbroken
 	 * @return the boolean
 	 */
-	boolean BreakUpWith(GameEntity heartbreaker, GameEntity heartbroken)
+	public boolean breakUpWith(GameEntity heartbreaker, GameEntity heartbroken)
 	{
 		return false;
 	}

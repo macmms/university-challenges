@@ -21,7 +21,7 @@ public class InventoryService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean PutInInventoryOf(GameEntity entity, GameEntity item)
+	public boolean PutInInventoryOf(GameEntity entity, GameEntity item)
 	{
 		return false;
 	}
@@ -33,7 +33,7 @@ public class InventoryService
 	 * @param entityWhichMayHaveItem the entity which may have the item in question
 	 * @return Whether or not the entity has the item
 	 */
-	boolean CheckIfEntityHas(GameEntity item, GameEntity entityWhichMayHaveItem)
+	public boolean CheckIfEntityHas(GameEntity item, GameEntity entityWhichMayHaveItem)
 	{
 		return false;
 	}
@@ -45,7 +45,7 @@ public class InventoryService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean RemoveFromInventoryOf(GameEntity entity, GameEntity item)
+	public boolean RemoveFromInventoryOf(GameEntity entity, GameEntity item)
 	{
 		return false;
 	}
@@ -57,7 +57,7 @@ public class InventoryService
 	 * @param equipment the equipment
 	 * @return the boolean
 	 */
-	boolean EquipTo(GameEntity entity, GameEntity equipment)
+	public boolean EquipTo(GameEntity entity, GameEntity equipment)
 	{
 		return false;
 	}
@@ -69,7 +69,7 @@ public class InventoryService
 	 * @param equipment the equipment
 	 * @return the boolean
 	 */
-	boolean UnequipFrom(GameEntity entity, GameEntity equipment)
+	public boolean UnequipFrom(GameEntity entity, GameEntity equipment)
 	{
 		return false;
 	}
@@ -81,7 +81,7 @@ public class InventoryService
 	 * @param consumable the consumable
 	 * @return the boolean
 	 */
-	boolean ConsumeBy(GameEntity entity, GameEntity consumable)
+	public boolean ConsumeBy(GameEntity entity, GameEntity consumable)
 	{
 		return false;
 	}

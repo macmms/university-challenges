@@ -24,7 +24,7 @@ public class StatService
 	 * @param statsToIncrease the stats to increase
 	 * @return the boolean
 	 */
-	boolean LevelUp(GameEntity entity, List<Stat> statsToIncrease)
+	public boolean LevelUp(GameEntity entity, List<Stat> statsToIncrease)
 	{
 		return false;
 	}
@@ -36,7 +36,7 @@ public class StatService
 	 * @param statsToCompareAgainst the stats to compare against
 	 * @return the boolean
 	 */
-	boolean CheckIfRequirementsMetBy(GameEntity entity, List<Stat> statsToCompareAgainst)
+	public boolean CheckIfRequirementsMetBy(GameEntity entity, List<Stat> statsToCompareAgainst)
 	{
 		return false;
 	}
@@ -48,7 +48,7 @@ public class StatService
 	 * @param statsToAddToEntity the stats to add to entity
 	 * @return the boolean
 	 */
-	boolean AddStatsTo(GameEntity entity, List<Stat> statsToAddToEntity)
+	public boolean AddStatsTo(GameEntity entity, List<Stat> statsToAddToEntity)
 	{
 		return false;
 	}
@@ -60,7 +60,7 @@ public class StatService
 	 * @param statsToRemoveFromEntity the stats to remove from entity
 	 * @return the boolean
 	 */
-	boolean RemoveStatsFrom(GameEntity entity, List<Stat> statsToRemoveFromEntity)
+	public boolean RemoveStatsFrom(GameEntity entity, List<Stat> statsToRemoveFromEntity)
 	{
 		return false;
 	}

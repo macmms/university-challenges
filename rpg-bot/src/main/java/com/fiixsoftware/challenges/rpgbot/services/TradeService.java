@@ -29,7 +29,7 @@ public class TradeService
 	 * @param barterer the barterer
 	 * @return the trade
 	 */
-	Trade StartTradeBetween(GameEntity initiator, GameEntity barterer)
+	public Trade StartTradeBetween(GameEntity initiator, GameEntity barterer)
 	{
 		return null;
 	}
@@ -38,9 +38,9 @@ public class TradeService
 	 * End trade.
 	 *
 	 * @param trade the trade
-	 * @param acceptTrade the accept trade
+	 * @param acceptTrade whether or not the trade is ending with an acceptance
 	 */
-	void EndTrade(Trade trade, boolean acceptTrade)
+	public void EndTrade(Trade trade, boolean acceptTrade)
 	{
 	}
 
@@ -51,7 +51,7 @@ public class TradeService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean OfferItemIn(Trade trade, GameEntity item)
+	public boolean OfferItemIn(Trade trade, GameEntity item)
 	{
 		return false;
 	}
@@ -63,7 +63,7 @@ public class TradeService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean RequestItemIn(Trade trade, GameEntity item)
+	public boolean RequestItemIn(Trade trade, GameEntity item)
 	{
 		return false;
 	}
@@ -75,7 +75,7 @@ public class TradeService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean RemoveOfferFrom(Trade trade, GameEntity item)
+	public boolean RemoveOfferFrom(Trade trade, GameEntity item)
 	{
 		return false;
 	}
@@ -87,7 +87,7 @@ public class TradeService
 	 * @param item the item
 	 * @return the boolean
 	 */
-	boolean RemoveRequestFrom(Trade trade, GameEntity item)
+	public boolean RemoveRequestFrom(Trade trade, GameEntity item)
 	{
 		return false;
 	}

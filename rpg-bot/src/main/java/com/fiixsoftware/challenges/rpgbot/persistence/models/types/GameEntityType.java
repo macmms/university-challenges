@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum GameEntityType
 {
+	PLAYER("player"),
 	NPC("npc"),
 	ENEMY("enemy"),
 	DOOR("door"),

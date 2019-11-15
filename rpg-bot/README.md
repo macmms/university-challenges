@@ -25,7 +25,7 @@ The love service has, for now, five methods:
 * flirtWith (provider, recipient, flirtyStatement) : Affection
 * giveGiftTo (provider, recipient, gift) : Affection
 * showPhysicalAffectionTo (provider, recipient, action) : Affection
-* enterRelationshipWith (initiator target) : boolean
+* enterRelationshipWith (initiator, target) : Relationship
 * breakUpWith (heartbreaker, heartbroken) : boolean
 
 The requirements for each are the following:
@@ -119,8 +119,10 @@ Already implemented.
 [ ] REQUIREMENT (3pt): The affection gained should be equivalent to the monetary value of the gift minus the level of the NPC  
 [ ] REQUIREMENT (3pt): Only NPCs can be the recipient of gifts  
 [ ] REQUIREMENT (3pt): The affection cannot exceed the minimum or maximum values of affection  
+[ ] REQUIREMENT (3pt): On failure, null is returned, and on success, the Affection of the recipient is saved and returned  
+[ ] REQUIREMENT (3pt): If there is no previous Affection, a new Affection is made and saved  
 [ ] IMPLEMENTATION (4pt): Fully implemented method  
-Points for full completion: bonus 4 points.
+Points for full completion: bonus 5 points.
 
 ### Show Physical Affection To
 
@@ -131,16 +133,20 @@ Points for full completion: bonus 4 points.
 [ ] REQUIREMENT (3pt): Only NPCs can be shown physical affection  
 [ ] REQUIREMENT (3pt): Affection increases by the listed formula  
 [ ] REQUIREMENT (3pt): The affection cannot exceed the minimum or maximum values of affection  
+[ ] REQUIREMENT (3pt): On failure, null is returned, and on success, the Affection of the recipient is saved and returned  
+[ ] REQUIREMENT (3pt): If there is no previous Affection, a new Affection is made and saved  
 [ ] IMPLEMENTATION (5pt): Fully implemented method  
-Points for full completion: bonus 7 points.
+Points for full completion: bonus 8 points.
 
 ### Enter Relationship With
 
 [ ] REQUIREMENT (3pt): Entering a relationship requires a minimum affection amount of 90  
 [ ] REQUIREMENT (3pt): Entering a relationship requires not being in a relationship with the target NPC  
 [ ] REQUIREMENT (3pt): A relationship can only be entered with an NPC  
+[ ] REQUIREMENT (3pt): The newly made relationshipis saved and returned on a successful creation  
+[ ] REQUIREMENT (3pt): Null is returned if the relationship cannot be made or fails to be made  
 [ ] IMPLEMENTATION (4pt): Fully implemented method  
-Points for full completion: bonus 4 points.
+Points for full completion: bonus 6 points.
 
 ### Break Up With
 
@@ -148,5 +154,7 @@ Points for full completion: bonus 4 points.
 [ ] REQUIREMENT (3pt): Ending a relationship reduces the affection the NPC has toward the player by 30  
 [ ] REQUIREMENT (3pt): A relationship can only be ended with an NPC  
 [ ] REQUIREMENT (3pt): The affection cannot go below the minimum value of affection  
+[ ] REQUIREMENT (3pt): On a successful ending of a relationship, the relationship object is deleted and true is returned  
+[ ] REQUIREMENT (3pt): On an unsuccessful ending of a relationship, false is returned  
 [ ] IMPLEMENTATION (4pt): Fully implemented method  
-Points for full completion: bonus 4 points.
+Points for full completion: bonus 5 points.

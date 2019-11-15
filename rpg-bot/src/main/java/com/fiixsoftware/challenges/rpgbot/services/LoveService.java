@@ -3,6 +3,7 @@ package com.fiixsoftware.challenges.rpgbot.services;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.Action;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.Affection;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Relationship;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatementType;
@@ -102,11 +103,11 @@ public class LoveService
 	 *
 	 * @param initiator the initiator
 	 * @param target the target
-	 * @return the success or failure of entering the relationship
+	 * @return the new relationship
 	 */
-	public boolean enterRelationshipWith(GameEntity initiator, GameEntity target)
+	public Relationship enterRelationshipWith(GameEntity initiator, GameEntity target)
 	{
-		return false;
+		return null;
 	}
 
 	/**

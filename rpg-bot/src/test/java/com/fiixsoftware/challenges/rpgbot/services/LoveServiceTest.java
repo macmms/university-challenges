@@ -1,19 +1,5 @@
 package com.fiixsoftware.challenges.rpgbot.services;
 
-import com.fiixsoftware.challenges.rpgbot.persistence.models.Affection;
-import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
-import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
-import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
-import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatementType;
-import com.fiixsoftware.challenges.rpgbot.persistence.repositories.AffectionRepository;
-import com.fiixsoftware.challenges.rpgbot.persistence.repositories.RelationshipRepository;
-import com.fiixsoftware.challenges.rpgbot.utilities.TestModelFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -22,9 +8,23 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Affection;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.GameEntity;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
+import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatementType;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.AffectionRepository;
+import com.fiixsoftware.challenges.rpgbot.persistence.repositories.RelationshipRepository;
+import com.fiixsoftware.challenges.rpgbot.utilities.TestModelUtility;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 @RunWith(MockitoJUnitRunner.class)
-public class LoveServiceTest
-{
+public class LoveServiceTest {
+
 	@InjectMocks
 	private LoveService sut;
 
@@ -38,59 +38,65 @@ public class LoveServiceTest
 	private InventoryService mockedInventoryService;
 
 	@Test
-	public void testPlayerFlirtWithNPCWithNoPriorAffection()
-	{
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.FLIRT);
+	public void testPlayerFlirtWithNPCWithNoPriorAffection() {
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.FLIRT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertTrue("Affection should be greater than the starting amount.", outputAffection.getAmountOfAffection() > Affection.STARTING_AFFECTION);
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertTrue("Affection should be greater than the starting amount.",
+				outputAffection.getAmountOfAffection() > Affection.STARTING_AFFECTION);
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 
 	@Test
-	public void testPlayerFlirtWithNPCIncreasesAffection()
-	{
+	public void testPlayerFlirtWithNPCIncreasesAffection() {
 		long initialAffection = Affection.STARTING_AFFECTION;
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Affection testAffection = TestModelFactory
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Affection testAffection = TestModelUtility
 				.buildAffection(testRecipient, testProvider, initialAffection);
 		testRecipient.getAffections().add(testAffection);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.FLIRT);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.FLIRT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertTrue("Affection should be greater than what it wsa initially.", outputAffection.getAmountOfAffection() > initialAffection);
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertTrue("Affection should be greater than what it wsa initially.",
+				outputAffection.getAmountOfAffection() > initialAffection);
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 
 	@Test
-	public void testPlayerFlirtWithNPCAffectionIsAlreadyAtMaximum()
-	{
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Affection testAffection = TestModelFactory.buildAffection(testRecipient, testProvider, Affection.MAXIMUM_AFFECTION);
+	public void testPlayerFlirtWithNPCAffectionIsAlreadyAtMaximum() {
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Affection testAffection = TestModelUtility
+				.buildAffection(testRecipient, testProvider, Affection.MAXIMUM_AFFECTION);
 		testRecipient.getAffections().add(testAffection);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.FLIRT);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.FLIRT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertEquals("Affection amount should remain at the maximum.", Affection.MAXIMUM_AFFECTION, outputAffection.getAmountOfAffection());
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertEquals("Affection amount should remain at the maximum.", Affection.MAXIMUM_AFFECTION,
+				outputAffection.getAmountOfAffection());
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 
 	@Test
-	public void testPlayerFlirtWithRecipientIsNotAnNPC()
-	{
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.DOOR);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.FLIRT);
+	public void testPlayerFlirtWithRecipientIsNotAnNPC() {
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.DOOR);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.FLIRT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
 		assertNull(outputAffection);
@@ -98,50 +104,57 @@ public class LoveServiceTest
 	}
 
 	@Test
-	public void testPlayerFlirtWithNonFlirtStatementAndNoPriorAffectionReducesAffectionBelowStartingAmount()
-	{
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.INSULT);
+	public void testPlayerFlirtWithNonFlirtStatementAndNoPriorAffectionReducesAffectionBelowStartingAmount() {
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.INSULT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertTrue("Affection should be below the starting amount.", outputAffection.getAmountOfAffection() < Affection.STARTING_AFFECTION);
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertTrue("Affection should be below the starting amount.",
+				outputAffection.getAmountOfAffection() < Affection.STARTING_AFFECTION);
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 
 	@Test
-	public void testPlayerFlirtWithStatementIsNotAFlirtReducesAffection()
-	{
+	public void testPlayerFlirtWithStatementIsNotAFlirtReducesAffection() {
 		long initialAffection = Affection.STARTING_AFFECTION;
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Affection testAffection = TestModelFactory
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Affection testAffection = TestModelUtility
 				.buildAffection(testRecipient, testProvider, initialAffection);
 		testRecipient.getAffections().add(testAffection);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.INSULT);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.INSULT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertTrue("Affection should be lower than what it wsa initially.", outputAffection.getAmountOfAffection() < initialAffection);
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertTrue("Affection should be lower than what it wsa initially.",
+				outputAffection.getAmountOfAffection() < initialAffection);
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 
 	@Test
-	public void testPlayerFlirtWithNonFlirtStatementCannotReduceAffectionBelowZero()
-	{
-		GameEntity testProvider = TestModelFactory.buildGameEntity(GameEntityType.PLAYER);
-		GameEntity testRecipient = TestModelFactory.buildGameEntity(GameEntityType.NPC);
-		Affection testAffection = TestModelFactory.buildAffection(testRecipient, testProvider, Affection.MINIMUM_AFFECTION);
+	public void testPlayerFlirtWithNonFlirtStatementCannotReduceAffectionBelowZero() {
+		GameEntity testProvider = TestModelUtility.buildGameEntity(GameEntityType.PLAYER);
+		GameEntity testRecipient = TestModelUtility.buildGameEntity(GameEntityType.NPC);
+		Affection testAffection = TestModelUtility
+				.buildAffection(testRecipient, testProvider, Affection.MINIMUM_AFFECTION);
 		testRecipient.getAffections().add(testAffection);
-		Statement testStatement = TestModelFactory.buildStatement(StatementType.INSULT);
+		Statement testStatement = TestModelUtility.buildStatement(StatementType.INSULT);
 
 		Affection outputAffection = sut.flirtWith(testProvider, testRecipient, testStatement);
-		assertEquals("Affection should be from the recipient", testRecipient, outputAffection.getEntityWithAffection());
-		assertEquals("Affection should be toward the provider", testProvider, outputAffection.getEntityAffectionIsToward());
-		assertEquals("Affection should be remain at the minimum.", Affection.MINIMUM_AFFECTION, outputAffection.getAmountOfAffection());
+		assertEquals("Affection should be from the recipient", testRecipient,
+				outputAffection.getEntityWithAffection());
+		assertEquals("Affection should be toward the provider", testProvider,
+				outputAffection.getEntityAffectionIsToward());
+		assertEquals("Affection should be remain at the minimum.", Affection.MINIMUM_AFFECTION,
+				outputAffection.getAmountOfAffection());
 		verify(mockedAffectionRepository, times(1)).save(any());
 	}
 }

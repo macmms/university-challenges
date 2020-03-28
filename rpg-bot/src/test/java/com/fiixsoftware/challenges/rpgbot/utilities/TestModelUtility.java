@@ -6,7 +6,7 @@ import com.fiixsoftware.challenges.rpgbot.persistence.models.Statement;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.types.GameEntityType;
 import com.fiixsoftware.challenges.rpgbot.persistence.models.types.StatementType;
 
-public class TestModelFactory {
+public class TestModelUtility {
 
 	public static GameEntity buildGameEntity(GameEntityType entityType) {
 		GameEntity testEntity = new GameEntity();
